@@ -101,7 +101,7 @@ class Extract_title:
     def find_time(title,public_date, content):
         #dựa trên rule-based
         thoi_gian = get_ner_datetime(title + ' ' + content, public_date)
-        print(thoi_gian)
+        # print(thoi_gian)
         return thoi_gian
 
 # print(find_oject("Chủ tịch nước Võ Văn Thưởng đến Vientiane, bắt đầu thăm Lào."))

@@ -131,7 +131,7 @@ def get_ner_datetime(text,default_datatime: datetime):
         entity['start_position'] = iter.start()
         entity['end_position'] = iter.end()
         obj['entities'].append(entity)
-    print(obj['entities'])
+    # print(obj['entities'])
     if get_nearest_date(default_datatime,obj['entities']) is None:
         return default_datatime
     else:

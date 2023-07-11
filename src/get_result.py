@@ -1,5 +1,4 @@
 from src.extract_content_event import Extract_content
-from underthesea import sent_tokenize
 from src.extraction_title_event import Extract_title
 
 class Get_result:
@@ -11,7 +10,7 @@ class Get_result:
     '''Tạo kết quả'''
     def get_result(self, public_date, content):
         #Bài báo
-        content_lst = sent_tokenize(content.strip())
+        content_lst = content.strip().split(".")
 
         # #Danh sách các tiêu đề
         # lst_title = self.find_title_and_object.find_title(content_lst)

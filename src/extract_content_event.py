@@ -32,5 +32,5 @@ class Extract_content:
         #nếu độ tương đồng của các câu ứng viên lớn hơn 0.5 => sẽ thêm vào content
         for i in candidate:
             if round(cosine_similarity(title_embedd, self.get_embeddings([i]))[0][0], 2) >= 0.5:
-                content.append(i)
+                content.append(i + ".")
         return content

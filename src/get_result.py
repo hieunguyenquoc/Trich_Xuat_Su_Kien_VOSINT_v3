@@ -17,23 +17,29 @@ class Get_result:
         
         # danh sách kết quả
         result = []
+        content_to_predict = ""
+        if content_lst[0] == "" :
+            content_to_predict = content_lst[1]
+        else:
+            content_to_predict = content_lst[0]
+
         # for i in range(len(lst_title)):
-        index_of_title = content_lst.index(content_lst[0])
+        index_of_title = content_lst.index(content_to_predict)
 
         #tìm kiếm nội dung của sự kiện
-        content = " ".join(self.find_content.extract_content(content_lst[0], content_lst[index_of_title+1:index_of_title+11]))
+        content = " ".join(self.find_content.extract_content(content_to_predict, content_lst[index_of_title+1:index_of_title+11]))
 
         #tìm kiếm các chủ thế, khách thể của sự kiện
-        chu_the, khach_the = self.find_title_and_object.find_oject(content_lst[0])
+        chu_the, khach_the = self.find_title_and_object.find_oject(content_to_predict)
 
         #tìm kiếm thời gian của sự kiện
-        thoi_gian = self.find_title_and_object.find_time(content_lst[0], public_date, content)
+        thoi_gian = self.find_title_and_object.find_time(content_to_predict, public_date, content)
 
         #tìm kiếm địa điểm của sự kiện
-        location = self.find_title_and_object.find_location(content_lst[0],content)
+        location = self.find_title_and_object.find_location(content_to_predict,content)
         result_dict = {
                 # 'Sự kiện' : i + 1,
-                'Tiêu đề' : content_lst[0],
+                'Tiêu đề' : content_to_predict,
                 'Chủ thể' : chu_the,
                 'Khách thể' : khach_the,
                 'Thời gian' : thoi_gian,

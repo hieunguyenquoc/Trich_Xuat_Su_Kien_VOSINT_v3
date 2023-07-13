@@ -66,10 +66,13 @@ class Extract_title:
                     chu_the = [w['wordForm'].replace("_", " ") for w in sentence[:i] if w['posTag'] in ['Nc', 'Np', 'Ny']]
                     khach_the = [w['wordForm'].replace("_", " ") for w in sentence[i+1:] if w['posTag'] in ['Nc', 'Np', 'Ny']]
                     break
-        chu_the_final = [i.replace("_"," ") for i in chu_the]
-        khach_the_final = [i.replace("_"," ") for i in khach_the]
+        chu_the_final = list(set([i.replace("_"," ") for i in chu_the]))
+        khach_the_final = list(set([i.replace("_"," ") for i in khach_the]))
+
+        chu_the_not_duplicate = [item for item in chu_the_final if not any(item in x for x in chu_the_final if x != item)]
+        khach_the_not_duplicate = [item for item in khach_the_final if not any(item in x for x in khach_the_final if x != item)]
         
-        return ', '.join(chu_the_final), ', '.join(khach_the_final)
+        return ', '.join(chu_the_not_duplicate), ', '.join(khach_the_not_duplicate)
     
     '''Tìm kiến địa điểm trong sự kiện'''
     def find_location(self, title, content):
@@ -101,7 +104,6 @@ class Extract_title:
     def find_time(title,public_date, content):
         #dựa trên rule-based
         thoi_gian = get_ner_datetime(title + ' ' + content, public_date)
-        # print(thoi_gian)
         return thoi_gian
 
 # print(find_oject("Chủ tịch nước Võ Văn Thưởng đến Vientiane, bắt đầu thăm Lào."))
